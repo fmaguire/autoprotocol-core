@@ -51,11 +51,11 @@ def kunkel_kinase(protocol, params):
     refs = params.refs
 
     oligo_wells = refs["oligo_plate"].wells_from(params.oligo_start, params.oligo_number, columnwise = True)
-    kinased_wells = refs["kinased_oligo_plate"].wells_from("A1", params.oligo_number, columnwise = True)
+    kinased_wells = refs["kinased_oligo_plate"].wells_from(params.kinased_start, params.oligo_number, columnwise = True)
 
-    protocol.distribute(params.kinase_mix_loc.set_volume("47:microliter"), kinased_wells, params.kinase_MM_volume)
+    protocol.distribute(params.kinase_mix_loc.set_volume("1500:microliter"), kinased_wells, params.kinase_MM_volume)
 
-    protocol.transfer(oligo_wells, kinased_wells, params.conc_oligo_volume, mix_after = True)
+    protocol.transfer(oligo_wells, kinased_wells, params.conc_oligo_volume, mix_after = True, mix_vol = params.conc_oligo_volume)
 
     protocol.seal("kinased_oligo_plate")
 

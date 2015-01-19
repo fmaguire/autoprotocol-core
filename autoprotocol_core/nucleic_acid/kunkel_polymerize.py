@@ -32,7 +32,7 @@ def kunkel_polymerize(protocol, params):
     reactions = refs["reaction_plate"].wells_from(params.reaction_start, params.kunkel_number, columnwise = True)
 
     for reaction in reactions:
-        protocol.transfer(params.polymerize_MM_loc, reaction, params.polymerize_MM_vol, mix_after=True)
+        protocol.transfer(params.polymerize_MM_loc, reaction, params.polymerize_MM_vol, mix_after=True, mix_vol=params.polymerize_MM_vol)
 
     protocol.seal("reaction_plate")
 

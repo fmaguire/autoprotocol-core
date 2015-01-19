@@ -47,12 +47,12 @@ def kunkel_anneal(protocol, params):
     params = make_dottable_dict(params)
     refs = make_dottable_dict(params.refs)
 
-    reaction_wells = refs["reaction_plate"].wells_from(0,len(params.oligos), columnwise=True)
+    reaction_wells = refs["reaction_plate"].wells_from(params.reaction_start,len(params.oligos), columnwise=True)
 
     protocol.distribute(params.ssDNA_mix_loc,reaction_wells, params.ssDNA_mix_vol)
 
     for oligo,reaction in zip(params.oligos,reaction_wells.wells):
-        protocol.transfer(oligo,reaction,params.oligo_vol,mix_after=True)
+        protocol.transfer(oligo,reaction,params.oligo_vol,mix_after=True, mix_vol=params.oligo_vol)
 
     protocol.seal("reaction_plate")
 

@@ -10,7 +10,7 @@ def kunkel_complete(protocol, params):
     Template for kunkel_comlplete_config.json file
     **keep container names the same**
     (change or add to defaults for your run):
-    {
+ {
         "parameters":{
             "oligo_plate": {
                 "id": null,
@@ -30,7 +30,13 @@ def kunkel_complete(protocol, params):
                 "storage": "cold_20",
                 "discard": false
             },
-            "resource_plate": {
+            "kinase_MM_1": {
+                "id": null,
+                "type": "micro-1.5",
+                "storage": "ambient",
+                "discard": false
+            },
+            "resource_plate_annealing_MM": {
                 "id": null,
                 "type": "384-pcr",
                 "storage": "cold_20",
@@ -54,74 +60,49 @@ def kunkel_complete(protocol, params):
                 "storage": "ambient",
                 "discard": false
             },
-            "H2O_3": {
+            "resource_plate_polymerization_MM": {
                 "id": null,
-                "type": "micro-1.5",
-                "storage": "ambient",
+                "type": "384-pcr",
+                "storage": "cold_20",
                 "discard": false
             },
-            "oligo_number": 12,
-            "oligo_start": "oligo_plate/A1",
+            "oligo_number": 4,
+            "oligo_start": "oligo_plate/C2",
+            "kinased_start": "kinased_oligo_plate/B2",
             "kinase_mix_loc": [
-                "resource_plate/1",
-                "resource_plate/2",
-                "resource_plate/3",
-                "resource_plate/4",
-                "resource_plate/5",
-                "resource_plate/6",
-                "resource_plate/7"
+                "kinase_MM_1/0"
             ],
             "kinase_incubation_time": "1:hour",
             "kinase_incubation_temp": "37:celsius",
             "kinase_MM_volume": "23:microliter",
             "conc_oligo_volume": "7:microliter",
             "mix_volume": "10:microliter",
-            "kinased_start": "kinased_oligo_plate/A1",
             "kinase_time": "60:minute",
             "kinased_oligos": [
-                "kinased_oligo_plate/A1",
-                "kinased_oligo_plate/B1",
-                "kinased_oligo_plate/C1",
-                "kinased_oligo_plate/D1",
-                "kinased_oligo_plate/E1",
-                "kinased_oligo_plate/F1",
-                "kinased_oligo_plate/G1",
-                "kinased_oligo_plate/H1",
-                "kinased_oligo_plate/A2",
                 "kinased_oligo_plate/B2",
                 "kinased_oligo_plate/C2",
                 "kinased_oligo_plate/D2",
-                "kinased_oligo_plate/E2",
-                "kinased_oligo_plate/F2"
+                "kinased_oligo_plate/E2"
                 ],
-            "combos": [[2,8],[1,2,7],[3,5,12],[2,5,11],[2,6,8],[2,5,8],[4,5,13],[1,4,5,10],[2,11],[4,14]],
+            "combos": [[1,2,4],[2,3]],
             "water": [
                 "H2O_1/0",
-                "H2O_2/0",
-                "H2O_3/0"
+                "H2O_2/0"
             ],
             "water_vol": "198:microliter",
-            "dilution_start": "diluted_oligo_plate/A1",
+            "dilution_start": "diluted_oligo_plate/A2",
             "oligo_vol": "2:microliter",
             "ssDNA_mix_vol": "2.2:microliter",
-            "ssDNA_mix_loc": "resource_plate/D1",
+            "ssDNA_mix_loc": "resource_plate_annealing_MM/D2",
             "oligo_vol": "2:microliter",
             "oligos": [
-                "diluted_oligo_plate/A1",
-                "diluted_oligo_plate/B1",
-                "diluted_oligo_plate/C1",
-                "diluted_oligo_plate/D1",
-                "diluted_oligo_plate/E1",
-                "diluted_oligo_plate/F1",
-                "diluted_oligo_plate/G1",
-                "diluted_oligo_plate/H1",
                 "diluted_oligo_plate/A2",
                 "diluted_oligo_plate/B2"
             ],
             "polymerize_MM_vol": "2.2:microliter",
-            "polymerize_MM_loc": "resource_plate/E1",
-            "kunkel_number": 10,
-            "reaction_start": "reaction_plate/A1"
+            "polymerize_MM_loc": "resource_plate_polymerization_MM/E2",
+            "kunkel_number": 2,
+            "reaction_start": "reaction_plate/B1"
         }
     }
     '''

@@ -75,11 +75,12 @@ def kunkel_dilute(protocol, params):
                         allow_carryover = True)
     oligos = params.kinased_oligos.wells
 
+
     for idx,combo in enumerate(params.combos):
         for i in combo:
             olig = oligos[i-1]
             protocol.transfer(olig,dilute_wells.wells[idx],params.oligo_vol,
-                                mix_after = True)
+                                mix_after = True, mix_vol= "5:microliter")
 
 if __name__ == '__main__':
     from autoprotocol.harness import run
