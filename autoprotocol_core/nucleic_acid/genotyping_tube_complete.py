@@ -66,39 +66,26 @@ def genotyping_plate_complete(protocol, params):
 
     '''
 
+
     params = make_dottable_dict(params)
     refs = make_dottable_dict(params.refs)
-    lygroup = []
-    print("___________________________")
+    tail_group = []
     for k, v in refs.iteritems():
         if k.startswith("tail"):
-            lygroup.append(v.well(0))
-    print(lygroup) 
-    lysed_wells = WellGroup(lygroup)
-    print(lysed_wells)    
+            tail_group.append(v.well(0))
+    lysed_wells = WellGroup(tail_group)
+    tail_number = len(lysed_wells)
+    pcr_wells = refs.pcr_plate.wells_from(params.PCR_start, tail_number)
 
-    lysed_wells = refs.tail_tube.wells_from(params.tail_start, params.tail_number)
-    pcr_wells = refs.pcr_plate.wells_from(params.tail_start, params.tail_number)
 
-    #DNA Extraction
-    protocol.transfer(refs.lysis_sol.well(0), lysed_wells, params.lysis_sol_volume, mix_after=False)
-    protocol.seal("tail_tube")
-    protocol.thermocycle("tail_tube", [
-        {"cycles": 1, "steps": [
-            {"temperature": params.lysis_incubation_temp, "duration": params.lysis_incubation_time},
-        ]},
-    ])
-
-    protocol.unseal("tail_tube")
+    #Lysis Neutralization
     protocol.transfer(refs.neut_sol.well(0), lysed_wells, params.neut_sol_volume, mix_after=True,
                  mix_vol=params.neut_mix_volume, repetitions=5)
     #PCR - Single Condition 
     protocol.distribute(refs.pcr_buffer.well(0), pcr_wells, params.pcr_buffer_volume, allow_carryover=True)
 
-    # protocol.transfer(lysed_wells, pcr_wells, params.lysed_tail_volume, mix_after=True, mix_vol= "5:microliter", repetitions=5)
+    protocol.transfer(lysed_wells, pcr_wells, params.lysed_tail_volume, mix_after=True, mix_vol= "5:microliter", repetitions=5)
     protocol.seal("pcr_plate")
-
-    protocol.seal("tail_tube")
     protocol.thermocycle(refs["pcr_plate"], [
         {"cycles": 1,
          "steps": [{
