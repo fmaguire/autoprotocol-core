@@ -5,24 +5,43 @@ def kunkel_transform(protocol, params):
     '''
     Template for kunkel_polymerize_config.json config file
     (change or add to defaults for your run):
-    {
+ {
         "parameters":{
-            "resource_plate": {
-                "id": null,
-                "type": "384-pcr",
-                "storage": "cold_20",
-                "discard": false
-            },
             "reaction_plate": {
                 "id": null,
                 "type": "384-pcr",
                 "storage": "ambient",
                 "discard": false
             },
-            "polymerize_MM_vol": "2.2:microliter",
-            "polymerize_MM_loc": "resource_plate/E1",
-            "kunkel_number": 10,
-            "reaction_start": "reaction_plate/A1"
+            "cells_1": {
+                "id": null,
+                "type": "micro-2.0",
+                "storage": "ambient",
+                "discard": false
+            },
+            "cells_2": {
+                "id": null,
+                "type": "micro-2.0",
+                "storage": "ambient",
+                "discard": false
+            },
+            "cell_plate": {
+                "id": null,
+                "type": "96-pcr",
+                "storage": "cold_20",
+                "discard": false
+            },
+            "kunkel_number": 2,
+            "reaction_start": "reaction_plate/B1",
+            "cells": [
+                "cells_1/0",
+                "cells_2/0"
+            ],
+            "DNA_transform_vol":"2.0:microliter",
+            "cell_start": "cell_plate/A1",
+            "cell_tube_capacity":"51:microliter",
+            "cell_vol_transfer":"50:microliter"
+
         }
     }
     '''
