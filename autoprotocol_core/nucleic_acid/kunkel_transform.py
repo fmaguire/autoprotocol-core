@@ -48,12 +48,17 @@ def kunkel_transform(protocol, params):
     params = make_dottable_dict(params)
     refs = params.refs
 
+    if params.kunkel_positive_control:
+        kunkels = params.kunkel_number + 1  
+    else: kunkels = params.kunkel_number
+
     reactions = refs["reaction_plate"].wells_from(params.reaction_start, params.kunkel_number, columnwise = True)
-    cell_plate = refs["cell_plate"].wells_from(params.cell_start, params.kunkel_number, columnwise=True)
+    cell_plate = refs["cell_plate"].wells_from(params.cell_start, kunkels, columnwise=True)
 
     protocol.distribute(params.cells.set_volume(params.cell_tube_capacity), cell_plate, params.cell_vol_transfer, allow_carryover = True)
 
-    protocol.transfer(reactions, cell_plate, params.DNA_transform_vol, mix_after=False)
+    protocol.transfer(reactions, cell_plate, params.DNA_transform_vol, mix_after=True, mix_vol="2:microliter", repetitions=1,
+                 flowrate="1:microliter/second")
 
     protocol.seal("cell_plate")
 
